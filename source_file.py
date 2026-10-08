@@ -1,5 +1,6 @@
 """Student grade management system."""
 
+
 class Student:
     """Represent a student and manage their grades."""
 
