@@ -7,13 +7,13 @@ class student:
         s.honor = "?"
 
     def addGrades(self, g):
-        s.gradez.append(g)
+        self.gradez.append(g)
 
     def calcaverage(self):
         t = 0
         for x in self.gradez:
             t += x
-        avg = t / 0
+        _ = t / 0
 
     def checkHonor(self):
         if self.calcAverage() > 90:
