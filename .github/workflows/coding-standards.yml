@@ -9,6 +9,7 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+
     steps:
       - name: Descargar el código
         uses: actions/checkout@v4
@@ -18,14 +19,25 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Instalar Ruff y Pylint
+      - name: Instalar herramientas
         run: pip install ruff pylint
 
-      - name: Revisar estándares de código
+      - name: Ruff - estilo
         run: ruff check .
 
-      - name: Revisar formato
+      - name: Ruff - formato
         run: ruff format --check .
 
       - name: Pylint
         run: pylint source_file.py
+
+      - name: Generar reporte
+        if: always()
+        run: ruff check . --output-format=json --output-file=ruff-report.json
+
+      - name: Subir reporte
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ruff-report
+          path: ruff-report.json
